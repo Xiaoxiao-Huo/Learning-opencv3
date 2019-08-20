@@ -1,0 +1,65 @@
+﻿/*
+Learning notes for "opencv3 introduction to programming"
+Create by Xiaoxiao
+2019.8.14
+*/
+
+Chapter 4
+
+输出常用数据结构
+
+#include<opencv2/opencv.hpp>
+#include<vector>
+int main()
+{
+        //【1】定义和输出二维点
+        cv::Point2f p(6, 2);
+        std::cout << "[二维点]p = " << p << ";\n" <<std::endl;
+        //【2】定义和输出三维点
+        cv::Point3f p3f(8, 2, 0);
+        std::cout << "[三维点]p = " << p3f << ";\n" << std::endl;
+        //【3】定义和输出基于Mat类的std::vector
+        std::vector<float> v;
+        v.push_back(3);
+        v.push_back(5);
+        v.push_back(7);
+        std::cout << "[基于Mat的vector]shortvec = " << cv::Mat(v) << ";\n" << std::endl;
+        //【4】定义和输出std::vector点
+        std::vector<cv::Point2f> points(20);
+        //size_t 类型表示C++中任何对象所能达到的最大长度,也是sizeof操作符返回的结果类型,它是无符号整数
+        for (size_t i = 0; i < points.size(); ++i)
+                points[i] = cv::Point2f((float)(i*5),(float)(i%7));
+                std::cout << "[二维点向量]points = " << points << ";"<<std::endl;
+        system("pause");
+        return 0;
+}
+
+输出：
+[二维点]p = [6, 2];
+
+[三维点]p = [8, 2, 0];
+
+[基于Mat的vector]shortvec = [3;
+ 5;
+ 7];
+
+[二维点向量]points = [0, 0;
+ 5, 1;
+ 10, 2;
+ 15, 3;
+ 20, 4;
+ 25, 5;
+ 30, 6;
+ 35, 0;
+ 40, 1;
+ 45, 2;
+ 50, 3;
+ 55, 4;
+ 60, 5;
+ 65, 6;
+ 70, 0;
+ 75, 1;
+ 80, 2;
+ 85, 3;
+ 90, 4;
+ 95, 5];

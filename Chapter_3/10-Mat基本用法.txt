@@ -1,0 +1,75 @@
+﻿Learning notes for "opencv3 introduction to programming"
+Create by Xiaoxiao
+2019.8.14
+
+Chapter 4
+
+Mat
+
+1.拷贝构造函数和赋值运算符只复制信息头。
+
+Mat A, C; //仅创建信息头部分
+A = imread(''l.jpg, CV_LOAD_IMAGE_COLOR) ; // 这里为矩阵开辟内存
+Mat B(A); //使用拷贝构造函数
+C = A; //赋值运算符
+
+以上代码中的所有Mat对象最终都指向同一个也是唯一一个数据矩阵。
+虽然 它们的信息头不同，但通过任何一个对象所做的改变也会影响其他对象。
+
+2.我们可以创建只引用部分数据的信息头。
+比如想要创建一个感兴趣区域(RO1), 只需要创建包含边界信息的信息头：
+
+Mat D (A, Rect (10, 10, 100, 100) ) ; // 使用矩形界定
+Mat E = A (Range: all () , Range (1,3) ) ; // 用行和列来界定
+
+3.使用函数clone()或者copyTo()来复制一幅图像的矩阵。
+
+Mat F = A.clone();
+Mat G;
+A.copyTo(G);
+
+4.显示创建Mat的7种方法
+
+（1）直接使用Mat()构造函数，这种方法简单明了，示范代码如下。
+
+Mat M(2,2, CV_8UC3, Scalar(0,0,255));
+
+（2）在C\C++中通过构造函数进行初始化，示范代码如下。
+
+int sz[3] = (2,2,2};
+Mat L(3,sz, CV_8UC, Scalar::all(0));
+指定维数，然后传递一个 指向一个数组的指针，这个数组包含每个维度的尺寸
+
+（3）已存在的Ipllmage指针创建信息头，示范代码如下。
+
+Ipllmage* img = cvLoadlmage(H1.jpgM, 1);
+Mat mtx (img) ; // 转换 IplImage*-> Mat
+mtx   输入矩阵
+mv    输出矩阵或矩阵数组
+
+（4）利用Mat类中的Create。成员函数进行Mat类的初始化操作，示范代码如下。
+
+M.create(4,4, CV_8UC(2));
+此创建方法不能为矩阵设初值，只是在改变尺寸时重新为矩阵数据开辟内存而已。
+
+outImage.create(image.size(),image.type()); //创建与image相同大小类型的outImage
+
+（5）采用Matlab形式的初始化方式：zeros(), ones(), eyes。
+
+Mat E = Mat::eye(4, 4, CV_64F);
+
+（6）对小矩阵使用逗号分隔式初始化函数，示范代码如下。
+
+Mat C = (Mat_<double>(3,3) « 0, -1, 0, -1, 5, -1, 0, -1, 0);
+
+（7）使用成员函数clone或者copyTo为已存在的对象创建新信息头
+
+Mat RowClone = C.row(1).clone();
+
+openCV中image.copyTo()有两种形式：
+
+1、image.copyTo(imageROI)，作用是把image的内容粘贴到imageROI；
+
+2、image.copyTo(imageROI，mask),作用是把mask和image重叠以后
+把mask中像素值为0（black）的点对应的image中的点变为透明，而保留其他点。
+
