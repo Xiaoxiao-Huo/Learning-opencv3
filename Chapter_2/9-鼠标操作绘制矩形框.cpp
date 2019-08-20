@@ -1,6 +1,6 @@
 ﻿/*
 Learning notes for "opencv3 introduction to programming"
-Create by Xiaoxiao
+Created by Xiaoxiao
 2019.8.14
 */
 
