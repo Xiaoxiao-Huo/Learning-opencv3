@@ -14,7 +14,7 @@ int main()
         cv::Mat image = cv::imread("H:\\猫1.jpg");
         cv::Mat image4 = cv::imread("H:\\猫4.jpg");
 
-        printf("猫1宽高与高宽比：%d %f %d\n", image.cols, (double)image.rows,image.rows/image.cols);
+        printf("猫1宽高与高宽比：%d %d %f\n", image.cols, image.rows,(double)image.rows/image.cols);
         printf("猫4宽高：%d %d %f\n", image4.cols, image4.rows, (double)image4.rows/image4.cols);
 
          //定义一个cv::Mat类型，用于存放，图像的ROI(ROI 感兴趣领域)
