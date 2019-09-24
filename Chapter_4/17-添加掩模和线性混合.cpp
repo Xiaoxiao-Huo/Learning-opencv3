@@ -33,7 +33,6 @@ bool addImage()
 
         //把mask复制到imageROI
         //把mask中像素值为0（black）的点对应的image中的点变为透明，而保留其他点
-。
         image3.copyTo(imageROI,mask);
 
         cv::namedWindow("ROI", 0);
